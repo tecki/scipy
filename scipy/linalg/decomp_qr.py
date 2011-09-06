@@ -180,15 +180,12 @@ def qr_multiply(a, c, mode='right', pivoting=False, overwrite_a=False,
         if mode is 'right', a.shape[0].
     pivoting : bool, optional
         Whether or not factorization should include pivoting for rank-revealing
-        qr decomposition. If pivoting, compute the decomposition
-        :lm:`A P = Q R` as above, but where P is chosen such that the diagonal
-        of R is non-increasing.
+        qr decomposition, see the documentation of qr.
     overwrite_a : bool, optional
         Whether data in a is overwritten (may improve performance)
     lwork : int, optional
         Work array size, lwork >= a.shape[1]. If None or -1, an optimal size
         is computed.
-        
     overwrite_c: bool, optional
         Whether data in c is overwritten (may improve performance)
         
