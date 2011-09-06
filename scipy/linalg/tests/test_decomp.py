@@ -885,18 +885,20 @@ class TestQR(TestCase):
         a = [[8,2,3],[2,9,3],[5,3,6]]
         q,r = qr(a)
         c = [1, 2, 3]
-        qc,r = qr_mult(a, c, "left") 
+        qc,r2 = qr_multiply(a, c, "left") 
         assert_array_almost_equal(dot(q, c), qc[:, 0])
-        qc,r = qr_mult(a, identity(3), "left")
+        assert_array_almost_equal(r, r2)
+        qc,r2 = qr_multiply(a, identity(3), "left")
         assert_array_almost_equal(q, qc)
 
     def test_simple_right(self):
         a = [[8,2,3],[2,9,3],[5,3,6]]
         q,r = qr(a)
         c = [1, 2, 3]
-        qc,r = qr_mult(a, c)
+        qc,r2 = qr_multiply(a, c)
         assert_array_almost_equal(dot(c, q), qc[0, :])
-        qc,r = qr_mult(a, identity(3))
+        assert_array_almost_equal(r, r2)
+        qc,r = qr_multiply(a, identity(3))
         assert_array_almost_equal(q, qc)
 
     def test_simple_pivoting(self):
@@ -985,9 +987,10 @@ class TestQR(TestCase):
         a = [[8,2],[2,9],[5,3]]
         q,r = qr(a, mode="economic") 
         c = [1, 2]
-        qc,r = qr_mult(a, c, "left")
+        qc,r2 = qr_multiply(a, c, "left")
         assert_array_almost_equal(dot(q, c), qc[:, 0])
-        qc,r = qr_mult(a, identity(2), "left")
+        assert_array_almost_equal(r, r2)
+        qc,r = qr_multiply(a, identity(2), "left")
         assert_array_almost_equal(qc, q)
 
     def test_simple_tall_left_pivoting(self):
@@ -1004,9 +1007,10 @@ class TestQR(TestCase):
         a = [[8,2],[2,9],[5,3]]
         q,r = qr(a, mode="economic")
         c = [1, 2, 3]
-        cq,r = qr_mult(a, c)
+        cq,r2 = qr_multiply(a, c)
         assert_array_almost_equal(dot(c, q), cq[0, :])
-        cq,r = qr_mult(a, identity(3))
+        assert_array_almost_equal(r, r2)
+        cq,r = qr_multiply(a, identity(3))
         assert_array_almost_equal(cq, q)
 
     def test_simple_tall_right_pivoting(self):
@@ -1068,9 +1072,10 @@ class TestQR(TestCase):
         a = [[8,2,3],[2,9,5]]
         q,r = qr(a, mode="economic") 
         c = [1, 2]
-        qc,r = qr_mult(a, c, "left")
+        qc,r2 = qr_multiply(a, c, "left")
         assert_array_almost_equal(dot(q, c), qc[:, 0])
-        qc,r = qr_mult(a, identity(2), "left")
+        assert_array_almost_equal(r, r2)
+        qc,r = qr_multiply(a, identity(2), "left")
         assert_array_almost_equal(qc, q)
 
     def test_simple_fat_left_pivoting(self):
@@ -1086,9 +1091,10 @@ class TestQR(TestCase):
         a = [[8,2,3],[2,9,5]]
         q,r = qr(a, mode="economic")
         c = [1, 2]
-        cq,r = qr_mult(a, c)
+        cq,r2 = qr_multiply(a, c)
         assert_array_almost_equal(dot(c, q), cq[0, :])
-        cq,r = qr_mult(a, identity(2))
+        assert_array_almost_equal(r, r2)
+        cq,r = qr_multiply(a, identity(2))
         assert_array_almost_equal(cq, q)
 
     def test_simple_fat_right_pivoting(self):
